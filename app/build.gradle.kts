@@ -7,6 +7,12 @@ androidApplicationConfig(
 )
 
 dependencies {
-    "implementation"("androidx.appcompat:appcompat:1.6.0")
-    "implementation"("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
+
+    moduleImpl(":utils")
+
+    impl(Deps.AndroidX.appCompat)
+    impl(Deps.AndroidX.lifecycleKtx)
+
+
+
 }

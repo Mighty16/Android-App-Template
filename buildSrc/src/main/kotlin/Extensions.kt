@@ -6,9 +6,13 @@ import org.gradle.api.JavaVersion
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Project
 import org.gradle.api.initialization.Settings
+import org.gradle.api.plugins.ExtensionAware
+import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.plugins.PluginAware
 import org.gradle.api.plugins.PluginContainer
+import org.gradle.kotlin.dsl.DependencyHandlerScope
 import org.gradle.kotlin.dsl.apply
+import org.gradle.kotlin.dsl.project
 import org.gradle.kotlin.dsl.repositories
 import org.gradle.kotlin.dsl.version
 import java.io.File
@@ -19,6 +23,9 @@ val Project.android: BaseExtension
 
 val Project.buildTypes: NamedDomainObjectContainer<BuildType>
     get() = android.buildTypes
+
+val Project.java: JavaPluginExtension
+    get() = extensions.findByName("java") as JavaPluginExtension
 
 fun Project.androidLibraryConfig(
     nameSpace: String,
@@ -103,6 +110,27 @@ fun Project.androidApplicationConfig(
     )
 }
 
+fun Project.applyKotlinLibPlugins(pluginsExtension: (PluginContainer.() -> Unit)? = null) {
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    plugins.run {
+        apply("java-library")
+        apply("org.jetbrains.kotlin.jvm")
+        pluginsExtension?.invoke(this)
+    }
+}
+
+fun Project.kotlinLibConfig() {
+    java.run {
+        sourceCompatibility = JavaVersion.VERSION_1_7
+        targetCompatibility = JavaVersion.VERSION_1_7
+    }
+}
+
 fun Project.applyAppPlugins(pluginsExtension: (PluginContainer.() -> Unit)? = null) {
     plugins.run {
         apply("com.android.application")
@@ -159,8 +187,8 @@ fun BuildType.signConfig(config: () -> ApkSigningConfig) {
     signingConfig = config.invoke()
 }
 
-fun DefaultConfig.stringField(name: String, value: String){
-    buildConfigField("String",name,"\"$value\"")
+fun DefaultConfig.stringField(name: String, value: String) {
+    buildConfigField("String", name, "\"$value\"")
 }
 
 fun BuildType.signConfig(config: ApkSigningConfig) {
@@ -170,4 +198,20 @@ fun BuildType.signConfig(config: ApkSigningConfig) {
 fun Project.enableBuildConfig(defaultConfigExtensions: (DefaultConfig.() -> Unit)? = null) {
     android.buildFeatures.buildConfig = true
     defaultConfigExtensions?.invoke(android.defaultConfig)
+}
+
+fun DependencyHandlerScope.testImpl(dep:String) {
+    "testImplementation"(dep)
+}
+
+fun DependencyHandlerScope.androidTestImpl(dep:String){
+    "androidTestImplementation"(dep)
+}
+
+fun DependencyHandlerScope.impl(dep: String) {
+    "implementation"(dep)
+}
+
+fun DependencyHandlerScope.moduleImpl(dep: String) {
+    "implementation"(project(dep))
 }

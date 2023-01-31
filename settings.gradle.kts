@@ -17,3 +17,5 @@ plugins {
 rootProject.name = "AppTemplate"
 rootProject.buildFileName = "build.gradle.kts"
 include(":app")
+include(":utils")
+include(":core-ui")
