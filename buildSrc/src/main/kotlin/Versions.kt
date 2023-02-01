@@ -20,11 +20,13 @@ object Deps {
         private const val lifecycleKtxVer = "2.3.1"
         private const val coreKtxVer = "1.8.0"
         private const val materialVer = "1.5.0"
+        private const val fragmentsKtxVer = "1.5.3"
 
         // Test ver
         private const val espressoVer = "3.5.1"
 
         const val appCompat = "androidx.appcompat:appcompat:$appCompatVer"
+        const val fragmentKtx = "androidx.fragment:fragment-ktx:$fragmentsKtxVer"
         const val lifecycleKtx = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleKtxVer"
         const val coreKtx = "androidx.core:core-ktx:$coreKtxVer"
         const val material = "com.google.android.material:material:$materialVer"
@@ -35,7 +37,7 @@ object Deps {
 
     }
 
-    object Network{
+    object Network {
 
         private const val retrofitVer = "2.9.0"
 
@@ -44,6 +46,13 @@ object Deps {
         const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVer"
 
         const val logInterceptor = "com.squareup.okhttp3:logging-interceptor:logInterceptorVer"
+    }
+
+    object Navigation {
+
+        private const val ciceroneVer = "7.1"
+
+        const val cicerone = "com.github.terrakok:cicerone:$ciceroneVer"
     }
 
     object Test {

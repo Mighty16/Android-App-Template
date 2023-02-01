@@ -1,0 +1,2 @@
+applyKotlinLibPlugins()
+kotlinLibConfig()

@@ -11,6 +11,7 @@
     <option name="modulesWithSuppressedNotConfigured">
       <set>
         <option value="AppTemplate.app" />
+        <option value="AppTemplate.core-navigation.cicerone" />
         <option value="AppTemplate.utils" />
       </set>
     </option>

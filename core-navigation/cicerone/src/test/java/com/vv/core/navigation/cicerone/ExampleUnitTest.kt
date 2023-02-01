@@ -1,4 +1,4 @@
-package com.vv.core.network
+package com.vv.core.navigation.cicerone
 
 import org.junit.Test
 
