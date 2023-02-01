@@ -9,10 +9,8 @@ androidApplicationConfig(
 dependencies {
 
     moduleImpl(":utils")
+    moduleImpl(":core-ui")
 
     impl(Deps.AndroidX.appCompat)
     impl(Deps.AndroidX.lifecycleKtx)
-
-
-
 }
