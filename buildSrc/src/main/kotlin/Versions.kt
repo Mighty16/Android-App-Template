@@ -35,6 +35,17 @@ object Deps {
 
     }
 
+    object Network{
+
+        private const val retrofitVer = "2.9.0"
+
+        private const val logInterceptorVer = "4.10.0"
+
+        const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVer"
+
+        const val logInterceptor = "com.squareup.okhttp3:logging-interceptor:logInterceptorVer"
+    }
+
     object Test {
 
         private const val junitVer = "4.13.2"
